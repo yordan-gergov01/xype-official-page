@@ -1,4 +1,5 @@
 import NeuralCanvas from '@/components/NeuralCanvas';
+import Button from '@/components/ui/Button';
 
 function HeroSection({ onScrollToForm }: { onScrollToForm: () => void }) {
   return (
@@ -34,12 +35,11 @@ function HeroSection({ onScrollToForm }: { onScrollToForm: () => void }) {
           и среден бизнес — тихо, но необратимо.
         </p>
 
-        <button
-          onClick={onScrollToForm}
-          className="mt-12 border border-primary bg-transparent text-primary px-9 py-3.5 text-[15px] tracking-[0.05em] cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_28px_rgba(90,158,114,0.3)]"
-        >
-          Споделете с нас →
-        </button>
+        <div className="mt-12 flex justify-center">
+          <Button variant="outline" onClick={onScrollToForm}>
+            Споделете с нас →
+          </Button>
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
+import Loader from '@/components/ui/Loader';
+import Textarea from '@/components/ui/TextArea';
 
 function ResearchForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -10,7 +14,7 @@ function ResearchForm() {
   const [industry, setIndustry] = useState('');
   const [challenge, setChallenge] = useState('');
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(false);
@@ -34,57 +38,47 @@ function ResearchForm() {
   if (submitted) {
     return (
       <div className="text-center py-16">
-        <p className="text-xl text-primary">Благодарим. Вашият отговор е важен за нас.</p>
+        <p className="text-xl text-primary">
+          Благодарим. Вашият отговор е важен за нас. Проверявайте посочения от Вас имейл за обратна
+          връзка от нас.
+        </p>
       </div>
     );
   }
 
-  const inputClass =
-    'w-full bg-[#111111] border border-[#1F1F1F] text-foreground px-4 py-3 text-[15px] font-sans mb-4 focus:border-primary focus:outline-none transition-colors';
-
   return (
     <form onSubmit={handleSubmit} className="mt-10">
-      <input
-        type="text"
+      <Input
         placeholder="Вашето име"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
-        className={inputClass}
       />
-      <input
+      <Input
         type="email"
         placeholder="Имейл адрес"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className={inputClass}
       />
-      <input
-        type="text"
+      <Input
         placeholder="Индустрия / вид бизнес"
         value={industry}
         onChange={(e) => setIndustry(e.target.value)}
-        className={inputClass}
       />
-      <textarea
+      <Textarea
         rows={5}
         placeholder="Опишете накратко какво ви затруднява най-много в момента..."
         value={challenge}
         onChange={(e) => setChallenge(e.target.value)}
         required
-        className={`${inputClass} resize-none`}
       />
 
       {error && <p className="text-red-500 text-sm mb-4">Нещо се обърка. Моля опитайте отново.</p>}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full border border-primary bg-transparent text-primary py-3.5 text-[15px] tracking-[0.05em] cursor-pointer transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_28px_rgba(90,158,114,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {loading ? 'Изпращане...' : 'Изпратете отговора си →'}
-      </button>
+      <Button type="submit" variant="outline" fullWidth disabled={loading}>
+        {loading ? <Loader /> : 'Изпратете отговора си →'}
+      </Button>
 
       <p className="text-center text-xs mt-4" style={{ color: '#333333' }}>
         Отговорите са анонимни по желание. Никога не споделяме данни с трети страни.
