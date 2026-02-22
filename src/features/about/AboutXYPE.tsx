@@ -2,7 +2,7 @@ function AboutXYPE() {
   return (
     <section className="py-24 px-6">
       <div className="max-w-[680px] mx-auto border-l-2 border-secondary pl-8">
-        <p className="uppercase text-primary" style={{ fontSize: 11, letterSpacing: '0.3em' }}>
+        <p className="uppercase text-primary" style={{ fontSize: 14, letterSpacing: '0.3em' }}>
           Кои сме ние?
         </p>
         <h2 className="mt-4 text-[32px] font-semibold text-foreground">

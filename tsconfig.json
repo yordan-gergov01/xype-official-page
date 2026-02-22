@@ -15,5 +15,6 @@
       "@utils/*": ["src/utils/*"],
       "@types/*": ["src/types/*"]
     }
-  }
+  },
+  "include": ["src", "*.d.ts"]
 }
