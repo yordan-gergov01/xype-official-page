@@ -79,10 +79,6 @@ function ResearchForm() {
       <Button type="submit" variant="outline" fullWidth disabled={loading}>
         {loading ? <Loader /> : 'Изпратете отговора си →'}
       </Button>
-
-      <p className="text-center text-xs mt-4" style={{ color: '#333333' }}>
-        Отговорите са анонимни по желание. Никога не споделяме данни с трети страни.
-      </p>
     </form>
   );
 }
