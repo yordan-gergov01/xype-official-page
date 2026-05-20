@@ -2,9 +2,8 @@ import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import AboutAI from '@/features/about/AboutAI';
 import AboutXYPE from '@/features/about/AboutXYPE';
+import CalculatorSection from '@/features/calculator/CalculatorSection';
 import HeroSection from '@/features/hero/HeroSection';
-import ResearchSection from '@/features/leads-form/ReasearchSection';
-import ResearchForm from '@/features/leads-form/ResearchForm';
 
 function LandingPage() {
   const scrollToForm = () => {
@@ -17,7 +16,7 @@ function LandingPage() {
       <HeroSection onScrollToForm={scrollToForm} />
       <AboutAI />
       <AboutXYPE />
-      <ResearchSection />
+      <CalculatorSection />
       <Footer />
     </div>
   );

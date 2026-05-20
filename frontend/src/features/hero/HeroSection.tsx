@@ -37,7 +37,7 @@ function HeroSection({ onScrollToForm }: { onScrollToForm: () => void }) {
 
         <div className="mt-12 flex justify-center">
           <Button variant="outline" onClick={onScrollToForm}>
-            Споделете с нас →
+            Изчисли колко губи бизнесът ти →
           </Button>
         </div>
       </div>
