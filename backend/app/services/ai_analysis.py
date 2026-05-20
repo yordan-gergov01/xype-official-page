@@ -1,17 +1,27 @@
 import json
+import os
 from openai import OpenAI
 from app.models.schemas import CalculatorInput, CalculationResult, AIAnalysis
 from app.prompts.analysis import build_analysis_prompt
 
-client = OpenAI()
-
 
 def analyze(data: CalculatorInput, result: CalculationResult) -> AIAnalysis:
+    client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+
     prompt = build_analysis_prompt(data, result)
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
+        messages=[
+        {
+        "role": "system",
+        "content": "You are a business automation expert. You respond ONLY with valid JSON. Never use generic phrases. Always mention specific technology (OCR, RPA, API integration, AI agent). Always use the exact numbers from the calculated losses."
+        },
+        {
+        "role": "user",
+        "content": prompt
+        }
+    ],
         temperature=0.3,
         max_tokens=500,
     )

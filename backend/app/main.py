@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.routers.calculator import router
@@ -20,6 +20,7 @@ app.add_middleware(
 app.include_router(router)
 
 
-@app.get("/health")
-async def health():
-    return {"status": "ok"}
+@app.get("/health", status_code=200)
+async def health() -> Response:
+    """Health check endpoint - used to verify the service is up."""
+    return Response(status_code=200)
