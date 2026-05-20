@@ -12,6 +12,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173", # localhost URL
         "https://xype.io",       # production
+        "https://www.xype.io",
     ],
     allow_methods=["POST"],
     allow_headers=["Content-Type"],
