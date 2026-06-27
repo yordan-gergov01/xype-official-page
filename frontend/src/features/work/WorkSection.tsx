@@ -1,6 +1,12 @@
+import { useState } from 'react';
+
 import Reveal from '@/components/Reveal';
+import { PROJECTS, type Project } from './projects';
+import ProjectModal from './ProjectModal';
 
 function WorkSection() {
+  const [active, setActive] = useState<Project | null>(null);
+
   return (
     <section id="work" className="py-24 px-6">
       <div className="max-w-[1100px] mx-auto">
@@ -10,24 +16,59 @@ function WorkSection() {
             Нашата работа
           </p>
           <h2 className="mt-5 font-bold text-foreground leading-[1.1] text-[clamp(32px,5vw,52px)]">
-            Проекти в подготовка.
+            Избрани проекти.
           </h2>
           <p className="mt-4 text-[16px] leading-[1.7] text-[#777777]">
-            В момента подготвяме селекция от реализирани проекти - очаквайте я съвсем скоро.
+            Реални решения, изградени за конкретни бизнес проблеми. Натиснете върху проект за детайли.
           </p>
         </Reveal>
 
-        <div className="mt-14 grid md:grid-cols-3 gap-4">
-          {[0, 1, 2].map((i) => (
-            <Reveal key={i} delay={i * 120}>
-              <div className="aspect-[4/3] p-6 border border-[#161616] bg-[#0D0D0D] flex flex-col justify-end gap-3">
-                <div className="h-3 w-1/3 animate-pulse bg-[#1C1C1C]" />
-                <div className="h-2.5 w-2/3 animate-pulse bg-[#161616]" />
-              </div>
+        <div className="mt-14 grid md:grid-cols-2 gap-5">
+          {PROJECTS.map((project, i) => (
+            <Reveal key={project.id} delay={(i % 2) * 120}>
+              <button
+                onClick={() => setActive(project)}
+                className="group w-full h-full text-left border border-[#1A1A1A] bg-[#0F0F0F] transition-colors duration-300 hover:border-secondary cursor-pointer overflow-hidden"
+              >
+                {/* Visual */}
+                {project.images.length > 0 ? (
+                  <div className="overflow-hidden border-b border-[#1A1A1A]">
+                    <img
+                      src={project.images[0]}
+                      alt={project.title}
+                      loading="lazy"
+                      className="w-full aspect-[16/10] object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative aspect-[16/10] border-b border-[#1A1A1A] bg-[#0C0C0C] flex items-center justify-center">
+                    <project.icon size={48} className="text-primary/30" />
+                    {project.badge && (
+                      <span className="absolute top-3 right-3 px-2.5 py-1 text-[11px] uppercase tracking-[0.15em] text-foreground/50 border border-[#222222] bg-[#0F0F0F]">
+                        {project.badge}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* Body */}
+                <div className="p-7">
+                  <p className="uppercase text-primary text-[12px] tracking-[0.25em]">{project.category}</p>
+                  <h3 className="mt-3 text-foreground font-semibold text-[20px] leading-[1.25]">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2.5 text-[14px] leading-[1.65] text-[#777777]">{project.tagline}</p>
+                  <span className="mt-4 inline-block text-[13px] text-foreground/60 group-hover:text-primary transition-colors">
+                    Виж проекта →
+                  </span>
+                </div>
+              </button>
             </Reveal>
           ))}
         </div>
       </div>
+
+      {active && <ProjectModal project={active} onClose={() => setActive(null)} />}
     </section>
   );
 }
