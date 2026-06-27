@@ -74,7 +74,7 @@ function Navbar() {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 navbar-glass flex flex-col px-8 py-6 gap-5">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#0A0A0A] border-b border-[#1A1A1A] shadow-xl flex flex-col px-8 py-6 gap-5">
           {LINKS.map((link) => (
             <a
               key={link.href}

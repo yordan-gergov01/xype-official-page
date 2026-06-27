@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { FiX } from 'react-icons/fi';
 
 import type { Project } from './projects';
@@ -98,28 +99,27 @@ function ProjectModal({ project, onClose }: Props) {
         </div>
       </div>
 
-      {lightbox && (
-        <div
-          className="fixed inset-0 z-[70] bg-black/95 flex items-center justify-center p-4"
-          onClick={(e) => {
-            e.stopPropagation();
-            setLightbox(null);
-          }}
-        >
-          <button
+      {lightbox &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[70] bg-black/95 flex items-center justify-center p-4"
             onClick={() => setLightbox(null)}
-            aria-label="Затвори"
-            className="absolute top-5 right-5 text-foreground/70 hover:text-primary transition-colors"
           >
-            <FiX size={30} />
-          </button>
-          <img
-            src={lightbox}
-            alt="Уголемен екран"
-            className="max-w-full max-h-[90vh] object-contain border border-[#222222]"
-          />
-        </div>
-      )}
+            <button
+              onClick={() => setLightbox(null)}
+              aria-label="Затвори"
+              className="absolute top-5 right-5 text-foreground/70 hover:text-primary transition-colors"
+            >
+              <FiX size={30} />
+            </button>
+            <img
+              src={lightbox}
+              alt="Уголемен екран"
+              className="max-w-full max-h-[90vh] object-contain border border-[#222222]"
+            />
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }
