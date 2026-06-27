@@ -47,4 +47,11 @@ export interface AuditRequest {
   automation_complexity: string;
 }
 
+export interface ContactRequest {
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+}
+
 export type Step = 'step1' | 'step2' | 'step3' | 'results' | 'audit';

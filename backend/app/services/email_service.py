@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from app.models.schemas import AuditRequest
+from app.models.schemas import AuditRequest, ContactRequest
 import os
 
 
@@ -21,6 +21,23 @@ def send_audit_request(data: AuditRequest) -> None:
     ИЗЧИСЛЕНИ ЗАГУБИ:
     - Годишна загуба: {data.cost_per_year_eur}€
     - Сложност на автоматизация: {data.automation_complexity}
+    """
+
+    _send(subject, body)
+
+
+def send_contact_request(data: ContactRequest) -> None:
+    subject = f"Ново запитване от сайта - {data.name}"
+
+    body = f"""
+    Ново запитване от формата за контакт.
+
+    ИМЕ: {data.name}
+    ИМЕЙЛ: {data.email}
+    ТЕЛЕФОН: {data.phone or "не е предоставен"}
+
+    СЪОБЩЕНИЕ:
+    {data.message}
     """
 
     _send(subject, body)

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
-from app.models.schemas import CalculatorInput, CalculatorResponse, AuditRequest
+from app.models.schemas import CalculatorInput, CalculatorResponse, AuditRequest, ContactRequest
 from app.services.calculator import calculate
 from app.services.ai_analysis import analyze
-from app.services.email_service import send_audit_request
+from app.services.email_service import send_audit_request, send_contact_request
 
 router = APIRouter(prefix="/api", tags=["calculator"])
 
@@ -23,6 +23,15 @@ async def calculate_roi(data: CalculatorInput):
 async def audit_request(data: AuditRequest):
     try:
         send_audit_request(data)
+        return {"success": True}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Грешка при изпращане на имейл.")
+
+
+@router.post("/contact")
+async def contact(data: ContactRequest):
+    try:
+        send_contact_request(data)
         return {"success": True}
     except Exception as e:
         raise HTTPException(status_code=500, detail="Грешка при изпращане на имейл.")

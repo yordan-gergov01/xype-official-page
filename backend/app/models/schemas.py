@@ -59,3 +59,10 @@ class AuditRequest(BaseModel):
     process_description: str
     cost_per_year_eur: float
     automation_complexity: str
+
+
+class ContactRequest(BaseModel):
+    name: str
+    email: EmailStr
+    phone: str | None = None
+    message: str

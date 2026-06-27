@@ -54,10 +54,19 @@
     border-radius: 0 !important;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Offset anchor targets so the fixed navbar doesn't cover section tops */
+  section[id] {
+    scroll-margin-top: 88px;
   }
 }
 
@@ -66,5 +75,33 @@
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+}
+
+/* Scroll-reveal: hidden until the element enters the viewport.
+   Kept unlayered so the .is-visible state reliably wins by specificity. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

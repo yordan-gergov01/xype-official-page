@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button';
 
 function HeroSection({ onScrollToForm }: { onScrollToForm: () => void }) {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="top" className="relative h-screen flex items-center justify-center overflow-hidden">
       <NeuralCanvas />
       <div className="relative z-10 text-center max-w-[720px] px-6">
         <p className="uppercase text-primary" style={{ fontSize: 14, letterSpacing: '0.35em' }}>
@@ -32,7 +32,7 @@ function HeroSection({ onScrollToForm }: { onScrollToForm: () => void }) {
           style={{ fontSize: 17, lineHeight: 1.7, color: '#888888' }}
         >
           Изкуственият интелект вече не е тема само за технологичните гиганти. Той навлиза в малкия
-          и среден бизнес — тихо, но необратимо.
+          и среден бизнес - тихо, но необратимо.
         </p>
 
         <div className="mt-12 flex justify-center">
